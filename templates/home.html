@@ -1,9 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Home</title>
-</head>
-<body>
-    <h1>Welcome to the Home Page</h1>
-    <p>This is the home page of our website.</p>
-</html>
+{% extends "layout.html" %}
+
+{% block title %}Home - FastAPI Blog{% endblock %}
+
+{% block header %}Latest Posts{% endblock %}
+{% block subtitle %}Browse the newest entries from the blog.{% endblock %}
+
+{% block content %}
+    <div class="row gy-4">
+        {% for post in posts %}
+            <div class="col-12">
+                <article class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="card-title h4">{{ post.title }}</h2>
+                        <p class="card-text text-secondary">{{ post.content }}</p>
+                    </div>
+                </article>
+            </div>
+        {% else %}
+            <div class="col-12">
+                <div class="alert alert-info mb-0">
+                    No posts available yet. Create a new post to get started.
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
